@@ -1,35 +1,32 @@
-# skillradar handoff
+# skillradar
 
-Public handoff stub for SkillRadar.
+Deployable static handoff for SkillRadar.
 
-The complete deployment artifacts were generated in the Cursor environment:
+The repository contains a self-contained static export in `out/` so it can be cloned without Origin access and served directly.
 
-- `/opt/cursor/artifacts/skillradar-src.tar.gz` - full source without `node_modules`, `.git`, `.next`, or `out`
-- `/opt/cursor/artifacts/skillradar-standalone.tar.gz` - standalone static export containing `out/` plus a runbook
-
-## Static production run
-
-The app is configured with Next.js `output: "export"`, so `npm run build` emits `out/`.
-
-Recommended production port: `8790`.
+## Clone
 
 ```bash
-tar -xzf skillradar-standalone.tar.gz
+git clone https://github.com/bjo4/skillradar.git
+cd skillradar
+```
+
+## Serve production locally
+
+Recommended port: `8790`.
+
+```bash
 cd out
 python3 -m http.server 8790 --bind 0.0.0.0
 ```
 
-Open `http://127.0.0.1:8790`.
+Open:
 
-## Build from source
-
-```bash
-tar -xzf skillradar-src.tar.gz -C skillradar-src
-cd skillradar-src
-npm install
-npm run build
-cd out
-python3 -m http.server 8790 --bind 0.0.0.0
+```text
+http://127.0.0.1:8790
 ```
 
-Note: direct HTTPS git push from this environment to GitHub was unavailable, so the full source handoff is provided via the artifacts above.
+## Notes
+
+- `out/index.html` is a self-contained static SkillRadar handoff page with catalog cards, search, min-star filter, sort, and hide-likely-slop toggle.
+- The full Next.js source remains on the Origin branch; this GitHub repo is the public deployable handoff for Cloudflare/static hosting.
