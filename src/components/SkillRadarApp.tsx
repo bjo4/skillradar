@@ -52,7 +52,6 @@ export function SkillRadarApp() {
       sort,
     });
 
-    setApiState("loading");
     fetch(`/api/skills/search?${params.toString()}`, { signal: controller.signal })
       .then(async (response) => {
         if (!response.ok) throw new Error(`API ${response.status}`);
